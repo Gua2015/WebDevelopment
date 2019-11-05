@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php require('db.php');?>
+
 <html ng-app="submitApp">
 <head>
     <meta charset="utf-8" />
@@ -171,24 +171,23 @@ function test_input($data) {
         echo $return;
 
     ?>
+
     <?php
-    if(isset($_POST['Submit'])){
-    $name = $_POST['name'];
-    $email= $_POST['email'];
-    $phone= $_POST['phone'];
-    $address= $_POST['address'];
-    $city= $_POST['city'];
-    $state= $_POST['state'];
-    $location= $_POST['location'];
-    $departure= $_POST['departure'];
-    $return= $_POST['return'];
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "reserv";
 
-    $query="insert into submission(name, email, phone, address, city, state, location, departuredate, returndate)
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connection_error) {
+      die("Connection failed: " . $conn->connection_error);
+    }
 
-    values('$name','$email','$phone','$address','$city','$state','$location','$departure','$return')";
- 
-    mysqli_query($conn,$query) or die("Cannot Add");
-  }
+    $sql = "INSERT INTO userinput (name, email, address, city, state, location, departuredate, returndate)
+    VALUES ('$name', '$email', '$phone', '$address', '$city', '$state', '$location', '$departure', '$return')";
+
+   
+    $conn->close();
     ?>
 
 
